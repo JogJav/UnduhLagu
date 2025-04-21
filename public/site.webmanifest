@@ -1,0 +1,22 @@
+{
+  "name": "UnduhLagu",
+  "short_name": "UnduhLagu",
+  "icons": [
+    {
+      "src": "/icon?size=192",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon?size=512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#f59e0b",
+  "background_color": "#000000",
+  "display": "standalone",
+  "orientation": "portrait"
+}
