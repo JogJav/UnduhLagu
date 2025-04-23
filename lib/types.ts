@@ -25,3 +25,21 @@ export interface ApiResponse {
   page?: number
   per_page?: number
 }
+
+// Add additional interfaces for better type safety
+
+export interface SearchParams {
+  q?: string
+  page?: string
+  per_page?: string
+}
+
+export interface VideoParams {
+  id: string
+}
+
+export interface PaginationProps {
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
+}

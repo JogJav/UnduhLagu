@@ -19,13 +19,16 @@ export default function DownloadPage({ params }: { params: { id: string } }) {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchVideoDetails = async () => {
+    const fetchVideoDetails = async (): Promise<void> => {
       try {
         setLoading(true)
         setLoadingRelated(true)
 
         // Fetch video details
         const response = await fetch(`/api/info?file_code=${params.id}`)
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
         const data = await response.json()
 
         if (data.status === 200 && data.result.length > 0) {
@@ -33,6 +36,9 @@ export default function DownloadPage({ params }: { params: { id: string } }) {
 
           // Fetch related videos
           const relatedResponse = await fetch(`/api/related?video_id=${params.id}`)
+          if (!relatedResponse.ok) {
+            throw new Error(`HTTP error! status: ${relatedResponse.status}`)
+          }
           const relatedData = await relatedResponse.json()
 
           if (relatedData.status === 200) {

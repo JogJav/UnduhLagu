@@ -97,7 +97,7 @@ function parseYouTubeHTML(html: string): VideoItem[] {
   return results
 }
 
-// Function to clean text
+// Add proper type for the cleanText function
 function cleanText(text: string): string {
   // Remove special characters except spaces
   let cleaned = text.replace(/[^a-zA-Z0-9\s]/g, " ")
@@ -127,7 +127,9 @@ function saveToCache(newData: VideoItem[]) {
   }
 }
 
-// Ubah fungsi searchVideos untuk menambahkan parameter Indonesia dan filter Washington, D.C.
+// Fix TypeScript errors in the YouTube API functions
+
+// Add proper error handling and type safety
 export async function searchVideos(query: string, maxResults?: number): Promise<VideoItem[]> {
   const encodedQuery = encodeURIComponent(query)
   // Tambahkan parameter gl=ID untuk region Indonesia

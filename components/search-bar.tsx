@@ -15,7 +15,7 @@ interface SearchBarProps {
 export default function SearchBar({ onSearch, initialQuery = "" }: SearchBarProps) {
   const [query, setQuery] = useState(initialQuery)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault()
     onSearch(query)
   }

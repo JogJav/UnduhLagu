@@ -22,14 +22,31 @@ export default function WatchPage({ params }: { params: { id: string } }) {
   const [isDisliked, setIsDisliked] = useState(false)
   const [showFullDescription, setShowFullDescription] = useState(false)
 
+  const handleLike = (): void => {
+    setIsLiked(!isLiked)
+    if (isDisliked) setIsDisliked(false)
+  }
+
+  const handleDislike = (): void => {
+    setIsDisliked(!isDisliked)
+    if (isLiked) setIsLiked(false)
+  }
+
+  const handleSubscribe = (): void => {
+    setIsSubscribed(!isSubscribed)
+  }
+
   useEffect(() => {
-    const fetchVideoDetails = async () => {
+    const fetchVideoDetails = async (): Promise<void> => {
       try {
         setLoading(true)
         setLoadingRelated(true)
 
         // Fetch video details
         const response = await fetch(`/api/search?q=${params.id}&max_results=1`)
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
         const data = await response.json()
 
         if (data.status === 200 && data.result.length > 0) {
@@ -37,6 +54,9 @@ export default function WatchPage({ params }: { params: { id: string } }) {
 
           // Fetch related videos
           const relatedResponse = await fetch(`/api/related?video_id=${params.id}`)
+          if (!relatedResponse.ok) {
+            throw new Error(`HTTP error! status: ${relatedResponse.status}`)
+          }
           const relatedData = await relatedResponse.json()
 
           if (relatedData.status === 200) {
@@ -44,7 +64,7 @@ export default function WatchPage({ params }: { params: { id: string } }) {
           }
         }
       } catch (error) {
-        console.error("Error fetching video details:", error)
+        console.error("Error fetching video details:", error instanceof Error ? error.message : String(error))
       } finally {
         setLoading(false)
         setLoadingRelated(false)
@@ -53,20 +73,6 @@ export default function WatchPage({ params }: { params: { id: string } }) {
 
     fetchVideoDetails()
   }, [params.id])
-
-  const handleLike = () => {
-    setIsLiked(!isLiked)
-    if (isDisliked) setIsDisliked(false)
-  }
-
-  const handleDislike = () => {
-    setIsDisliked(!isDisliked)
-    if (isLiked) setIsLiked(false)
-  }
-
-  const handleSubscribe = () => {
-    setIsSubscribed(!isSubscribed)
-  }
 
   return (
     <div className="min-h-screen bg-background">

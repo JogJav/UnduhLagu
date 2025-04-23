@@ -16,7 +16,7 @@ export function Analytics() {
         document.body.appendChild(script)
       } catch (error) {
         // Silently fail - analytics should not break the app
-        console.error("Failed to load analytics:", error)
+        console.error("Failed to load analytics:", error instanceof Error ? error.message : String(error))
       }
     }
   }, [])

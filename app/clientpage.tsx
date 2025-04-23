@@ -66,10 +66,14 @@ function VideoContent() {
     }
   }, [])
 
-  const fetchVideos = async () => {
+  // Add proper type for the fetchVideos function
+  const fetchVideos = async (): Promise<void> => {
     try {
       setLoading(true)
       const response = await fetch(`/api/list?page=${page}&per_page=12`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
       const data = await response.json()
 
       if (data.status === 200) {
@@ -82,21 +86,25 @@ function VideoContent() {
             !(video.description && video.description.toLowerCase().includes("d.c.")),
         )
         setVideos(filteredVideos)
-        setTotalPages(Math.ceil(data.total / data.per_page))
+        setTotalPages(Math.ceil((data.total || filteredVideos.length) / (data.per_page || 12)))
       }
     } catch (error) {
-      console.error("Error fetching videos:", error)
+      console.error("Error fetching videos:", error instanceof Error ? error.message : String(error))
     } finally {
       setLoading(false)
     }
   }
 
-  const handleSearch = async (searchQuery: string) => {
+  // Add proper type for the handleSearch function
+  const handleSearch = async (searchQuery: string): Promise<void> => {
     if (!searchQuery.trim()) return
 
     try {
       setLoading(true)
       const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
       const data = await response.json()
 
       if (data.status === 200) {
@@ -112,17 +120,18 @@ function VideoContent() {
         setTotalPages(1) // Search results don't have pagination in this implementation
       }
     } catch (error) {
-      console.error("Error searching videos:", error)
+      console.error("Error searching videos:", error instanceof Error ? error.message : String(error))
     } finally {
       setLoading(false)
     }
   }
 
-  const handlePrevPage = () => {
+  // Add proper types for the pagination functions
+  const handlePrevPage = (): void => {
     if (page > 1) setPage(page - 1)
   }
 
-  const handleNextPage = () => {
+  const handleNextPage = (): void => {
     if (page < totalPages) setPage(page + 1)
   }
 

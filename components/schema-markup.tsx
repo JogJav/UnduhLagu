@@ -8,10 +8,11 @@ interface VideoSchemaProps {
 }
 
 export function SchemaMarkup({ video }: VideoSchemaProps) {
-  const pathname = usePathname()
+  // Update the usePathname check to handle null safely
+  const pathname = usePathname() || ""
   const isHomePage = pathname === "/"
-  const isWatchPage = pathname?.startsWith("/watch/")
-  const isDownloadPage = pathname?.startsWith("/download/")
+  const isWatchPage = pathname.startsWith("/watch/")
+  const isDownloadPage = pathname.startsWith("/download/")
   const isTrendingPage = pathname === "/trending"
 
   // Base website schema that will be included on all pages
@@ -108,31 +109,31 @@ export function SchemaMarkup({ video }: VideoSchemaProps) {
   )
 }
 
-// Helper function to format duration from "MM:SS" to ISO 8601 duration format
+// Improve the formatDuration function with better type safety
 function formatDuration(duration: string | undefined): string {
   if (!duration) return "PT0M0S"
 
   const parts = duration.split(":")
   if (parts.length === 2) {
-    const minutes = Number.parseInt(parts[0], 10)
-    const seconds = Number.parseInt(parts[1], 10)
+    const minutes = Number.parseInt(parts[0], 10) || 0
+    const seconds = Number.parseInt(parts[1], 10) || 0
     return `PT${minutes}M${seconds}S`
   }
 
   return "PT0M0S"
 }
 
-// Helper function to parse views from string format (e.g., "1.2K views") to number
+// Improve the parseViews function with better type safety
 function parseViews(views: string | undefined): number {
   if (!views) return 0
 
   const viewsStr = views.toLowerCase().replace(/\s+views/, "")
 
   if (viewsStr.endsWith("k")) {
-    return Number.parseFloat(viewsStr.replace("k", "")) * 1000
+    return Number.parseFloat(viewsStr.replace("k", "")) * 1000 || 0
   }
   if (viewsStr.endsWith("m")) {
-    return Number.parseFloat(viewsStr.replace("m", "")) * 1000000
+    return Number.parseFloat(viewsStr.replace("m", "")) * 1000000 || 0
   }
 
   return Number.parseInt(viewsStr, 10) || 0

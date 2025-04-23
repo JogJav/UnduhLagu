@@ -11,11 +11,14 @@ export default function TrendingPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchTrendingVideos = async () => {
+    const fetchTrendingVideos = async (): Promise<void> => {
       try {
         setLoading(true)
         // Use the list API endpoint as a fallback if trending doesn't work
         const response = await fetch(`/api/list?page=1&per_page=24`)
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
         const data = await response.json()
 
         if (data.status === 200) {
@@ -30,7 +33,7 @@ export default function TrendingPage() {
           setVideos(filteredVideos)
         }
       } catch (error) {
-        console.error("Error fetching trending videos:", error)
+        console.error("Error fetching trending videos:", error instanceof Error ? error.message : String(error))
         // Fallback to empty array if error occurs
         setVideos([])
       } finally {
