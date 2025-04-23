@@ -1,4 +1,5 @@
 import Link from "next/link"
+import RssLink from "./rss-link"
 
 export default function Footer() {
   return (
@@ -6,11 +7,12 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
           <div>
-            <h3 className="font-bold text-lg mb-3 text-amber-500">UnduhLagu</h3>
+            <h3 className="font-bold text-lg mb-3 text-amber-500">Unduh Lagu</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Platform streaming dan download musik Indonesia terlengkap. Nikmati lagu trending Indonesia terbaru dengan
               mudah.
             </p>
+            <RssLink />
           </div>
 
           <div>
@@ -70,7 +72,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-4 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} UnduhLagu. Hak Cipta Dilindungi.</p>
+          <p>&copy; {new Date().getFullYear()} Unduh Lagu. Hak Cipta Dilindungi.</p>
           <p className="mt-1">
             <Link href="/kontak" className="text-amber-500 hover:text-red-600 transition-colors">
               Informasi Geografis

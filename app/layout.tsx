@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   description: siteConfig.home_description,
   robots: siteConfig.home_robots,
   generator: "v0.dev",
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/api/rss", title: "Unduh Lagu - Streaming dan Download Musik Indonesia Terbaru" },
+      ],
+    },
+  },
 }
 
 export default function RootLayout({
