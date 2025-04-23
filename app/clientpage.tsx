@@ -7,6 +7,9 @@ import { SchemaMarkup } from "@/components/schema-markup"
 import type { VideoItem } from "@/lib/types"
 import ClientLoading from "./clientloading"
 
+// Import the Footer component
+import Footer from "@/components/footer"
+
 // Add these CSS keyframes for animations
 const gradientAnimation = `
 @keyframes float {
@@ -414,11 +417,7 @@ export default function ClientHomePage() {
         <VideoContent />
       </Suspense>
 
-      <footer className="border-t bg-background mt-auto">
-        <div className="container mx-auto px-4 py-4 text-center text-amber-500">
-          &copy; {new Date().getFullYear()} UnduhLagu
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

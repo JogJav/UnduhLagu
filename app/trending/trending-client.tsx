@@ -6,6 +6,9 @@ import UnduhLaguQuote from "@/components/unduh-lagu-quote"
 import { SchemaMarkup } from "@/components/schema-markup"
 import type { VideoItem } from "@/lib/types"
 
+// Import the Footer component
+import Footer from "@/components/footer"
+
 export default function TrendingPage() {
   const [videos, setVideos] = useState<VideoItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -57,11 +60,8 @@ export default function TrendingPage() {
         <VideoGrid videos={videos} loading={loading} />
       </main>
 
-      <footer className="border-t bg-background mt-auto">
-        <div className="container mx-auto px-4 py-4 text-center text-amber-500">
-          &copy; {new Date().getFullYear()} UnduhLagu
-        </div>
-      </footer>
+      {/* Replace the existing footer in the return statement with: */}
+      <Footer />
     </div>
   )
 }

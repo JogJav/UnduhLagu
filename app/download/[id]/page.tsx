@@ -10,6 +10,8 @@ import { SchemaMarkup } from "@/components/schema-markup"
 import type { VideoItem } from "@/lib/types"
 import Link from "next/link"
 import Image from "next/image"
+// Import the Footer component
+import Footer from "@/components/footer"
 
 export default function DownloadPage({ params }: { params: { id: string } }) {
   const [video, setVideo] = useState<VideoItem | null>(null)
@@ -139,11 +141,7 @@ export default function DownloadPage({ params }: { params: { id: string } }) {
         </div>
       </main>
 
-      <footer className="border-t bg-background mt-auto">
-        <div className="container mx-auto px-4 py-4 text-center text-muted-foreground">
-          &copy; {new Date().getFullYear()} UnduhLagu
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
