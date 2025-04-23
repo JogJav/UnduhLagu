@@ -23,13 +23,13 @@ export default function KontakPage() {
           <div className="bg-gradient-to-r from-amber-50 to-red-50 dark:from-amber-950/30 dark:to-red-950/30 rounded-lg p-6 mb-8 border border-amber-100 dark:border-amber-900/50 shadow-sm">
             <h2 className="text-xl font-semibold mb-4 text-amber-700 dark:text-amber-400">Tentang UnduhLagu</h2>
             <p className="mb-4">
-              UnduhLagu adalah platform streaming dan download musik Indonesia yang beroperasi secara online. Kami
-              berkomitmen untuk menyediakan akses mudah ke konten musik berkualitas tinggi bagi pengguna di seluruh
+              Unduh Lagu Adalah Platform Streaming dan Download Musik Indonesia Yang Beroperasi Secara Online. Kami
+              Berkomitmen Untuk Menyediakan Akses Mudah ke Konten Musik Berkualitas Tinggi Bagi Pengguna di Seluruh
               Indonesia.
             </p>
             <p>
-              Sebagai platform digital, kami menghormati hak cipta dan bekerja sesuai dengan peraturan yang berlaku di
-              Indonesia terkait dengan distribusi konten digital.
+              Sebagai Platform Digital, Kami Menghormati Hak Cipta dan Sesuai Dengan Peraturan Yang Berlaku di
+              Indonesia Terkait dengan Distribusi Konten Digital.
             </p>
           </div>
 
@@ -60,11 +60,11 @@ export default function KontakPage() {
               </h2>
               <p className="mb-3 flex items-center gap-2">
                 <Mail className="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden="true" tabIndex={-1} />
-                <span>Email: kontak@unduhlagu.online</span>
+                <span>Email: unduhlagu123@gmail.com</span>
               </p>
               <p className="mb-3 flex items-center gap-2">
                 <Phone className="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden="true" tabIndex={-1} />
-                <span>Telepon: +62 812 3456 7890</span>
+                <span>Telepon: +6282227920263</span>
               </p>
               <p className="mb-3 flex items-center gap-2">
                 <Globe className="h-4 w-4 text-amber-600 dark:text-amber-400" aria-hidden="true" tabIndex={-1} />
@@ -119,7 +119,7 @@ export default function KontakPage() {
                 href="mailto:kerjasama@unduhlagu.online"
                 className="text-amber-600 hover:text-red-600 dark:text-amber-400 dark:hover:text-red-400 font-medium"
               >
-                kerjasama@unduhlagu.online
+                unduhlagu123@gmail.com
               </a>
             </p>
             <p>Tim kami akan merespons dalam waktu 1-2 hari kerja.</p>
