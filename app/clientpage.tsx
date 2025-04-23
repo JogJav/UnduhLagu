@@ -233,19 +233,31 @@ function VideoContent() {
               <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-amber-500 via-rose-500 to-violet-500 animate-[pulse_2s_ease-in-out_infinite]"></div>
             </div>
 
-            {/* Animated badge */}
-            <div className="flex justify-center mt-2">
+            {/* Conclusion - Updated with new background */}
+            <div className="w-full mt-2 bg-gradient-to-r from-amber-500 to-red-500 rounded-xl py-3 px-4 shadow-md transform hover:scale-[1.01] transition-all duration-300 border border-amber-400 dark:border-amber-700">
+              <p className="text-xs md:text-sm text-center font-medium leading-relaxed tracking-wide text-white">
+                <span className="font-bold text-base md:text-lg">Unduh Lagu</span> hadir sebagai solusi lengkap bagi
+                pecinta musik Indonesia yang menginginkan akses mudah untuk streaming dan download lagu favorit mereka.
+                Dengan koleksi <span className="font-semibold">musik populer Indonesia</span> yang komprehensif, fitur{" "}
+                <span className="font-semibold">unduh video musik kualitas tinggi</span>, dan antarmuka yang
+                user-friendly, Unduh Lagu menjadi{" "}
+                <span className="font-semibold">platform streaming musik Indonesia terlengkap</span> yang wajib dicoba.
+              </p>
+            </div>
+
+            {/* Animated badge - Moved below conclusion */}
+            <div className="flex justify-center mt-4 mb-2">
               <div
                 className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 to-red-500 text-white text-sm md:text-base font-bold animate-[bounce_2s_infinite] shadow-lg"
                 tabIndex={-1}
                 aria-hidden="true"
               >
                 <span className="mr-2" tabIndex={-1}>
-                  ⚡
+                  🔥🔥🔥
                 </span>{" "}
-                Trending YouTube Now{" "}
+                Trending YouTube Terbaru{" "}
                 <span className="ml-2" tabIndex={-1}>
-                  🔥
+                  🔥🔥🔥
                 </span>
               </div>
             </div>
@@ -280,8 +292,8 @@ function VideoContent() {
       {!query && (
         <article className="mt-12 max-w-none mx-auto text-sm">
           <h2 className="text-xl font-bold text-center mb-6 text-amber-700 dark:text-amber-400">
-            UnduhLagu : Platform Terbaik Untuk Download Musik MP3 Dan MP4 Serta Streaming Dari YouTube Dengan Converter,
-            GRATIS.
+            Unduh Lagu Merupakan Platform Terbaik Untuk Download MP3 Dan Download MP4 Serta Streaming Dari YouTube
+            Dengan Converter, GRATISSS.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
@@ -289,7 +301,7 @@ function VideoContent() {
             <div className="bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-800/20 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold mb-2 text-red-600 dark:text-red-400">Streaming Musik Terlengkap</h3>
               <p className="text-sm mb-2">
-                <strong>UnduhLagu</strong> menawarkan pengalaman <strong>streaming musik Indonesia</strong> yang mulus
+                <strong>Unduh Lagu</strong> menawarkan pengalaman <strong>streaming musik Indonesia</strong> yang mulus
                 dengan koleksi terlengkap dari berbagai genre musik.
               </p>
               <ul className="text-xs list-disc pl-4 space-y-1 text-amber-800 dark:text-amber-300">
@@ -390,17 +402,6 @@ function VideoContent() {
               <h4 className="text-sm font-semibold mb-1 text-red-600 dark:text-red-400">Mudah Digunakan</h4>
               <p className="text-xs">Antarmuka sederhana dan intuitif</p>
             </div>
-          </div>
-
-          {/* Conclusion */}
-          <div className="bg-gradient-to-br from-amber-50 to-red-50 dark:from-amber-900/20 dark:to-red-900/20 rounded-xl p-4 shadow-md">
-            <p className="text-xs text-center italic">
-              <strong>UnduhLagu</strong> hadir sebagai solusi lengkap bagi pecinta musik Indonesia yang menginginkan
-              akses mudah untuk streaming dan download lagu favorit mereka. Dengan koleksi{" "}
-              <strong>musik populer Indonesia</strong> yang komprehensif, fitur{" "}
-              <strong>unduh video musik kualitas tinggi</strong>, dan antarmuka yang user-friendly, UnduhLagu menjadi{" "}
-              <strong>platform streaming musik Indonesia terlengkap</strong> yang wajib dicoba.
-            </p>
           </div>
         </article>
       )}
