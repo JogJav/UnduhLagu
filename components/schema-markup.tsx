@@ -72,7 +72,7 @@ export function SchemaMarkup({ video }: VideoSchemaProps) {
         "@type": "MusicPlaylist",
         name: "Trending Musik Indonesia",
         numTracks: 24,
-        description: "Koleksi lagu trending dan populer Indonesia terbaru di UnduhLagu",
+        description: "Koleksi Lagu Trending dan Populer Indonesia Terbaru di UnduhLagu",
       }
     : null
 
@@ -81,7 +81,7 @@ export function SchemaMarkup({ video }: VideoSchemaProps) {
     ? {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "UnduhLagu - Watch and Share Videos",
+        name: "UnduhLagu - Download and Streaming Video Music YouTube",
         description: "Discover and watch amazing videos on UnduhLagu. Share your favorites with friends and family.",
         isPartOf: {
           "@type": "WebSite",
