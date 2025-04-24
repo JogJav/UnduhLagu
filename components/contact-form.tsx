@@ -2,12 +2,17 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Send, CheckCircle, AlertCircle } from "lucide-react"
+import { Send, CheckCircle, AlertCircle, ShieldCheck } from "lucide-react"
+import ReCAPTCHA from "@/components/recaptcha"
+import { trackFormSubmission } from "@/lib/analytics"
+
+// Use a placeholder site key - in production, this would be your actual reCAPTCHA site key
+const RECAPTCHA_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // This is Google's test key
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -19,6 +24,13 @@ export default function ContactForm() {
 
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+  const [startTime, setStartTime] = useState<number | null>(null)
+
+  // Set the start time when the component mounts
+  useEffect(() => {
+    setStartTime(Date.now())
+  }, [])
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -41,6 +53,10 @@ export default function ContactForm() {
       newErrors.message = "Pesan diperlukan"
     }
 
+    if (!recaptchaToken) {
+      newErrors.recaptcha = "Silakan verifikasi bahwa Anda bukan robot"
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -55,10 +71,28 @@ export default function ContactForm() {
     }
   }
 
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token)
+    if (token) {
+      // Clear recaptcha error if it exists
+      setErrors((prev) => ({ ...prev, recaptcha: "" }))
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    // Calculate time spent on form if startTime exists
+    const timeSpent = startTime ? Date.now() - startTime : null
+
     if (!validateForm()) {
+      // Track failed validation
+      trackFormSubmission("contact_form", false, {
+        subject: formData.subject || "not_specified",
+        hasMessage: Boolean(formData.message.trim()),
+        errorType: "validation_error",
+        submissionTime: timeSpent || undefined,
+      })
       return
     }
 
@@ -66,14 +100,31 @@ export default function ContactForm() {
 
     // Simulate form submission
     try {
-      // In a real application, you would send the form data to your server here
-      // await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
+      // In a real application, you would send the form data and recaptchaToken to your server here
+      // await fetch('/api/contact', {
+      //   method: 'POST',
+      //   body: JSON.stringify({ ...formData, recaptchaToken })
+      // })
 
       // Simulate network delay
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
+      // Track successful submission
+      trackFormSubmission("contact_form", true, {
+        subject: formData.subject,
+        hasMessage: true,
+        submissionTime: timeSpent || undefined,
+      })
+
       setFormStatus("success")
       setFormData({ name: "", email: "", subject: "", message: "" })
+      setRecaptchaToken(null)
+      setStartTime(Date.now()) // Reset start time for potential new submission
+
+      // Reset reCAPTCHA
+      if (window.grecaptcha) {
+        window.grecaptcha.reset()
+      }
 
       // Reset form status after 5 seconds
       setTimeout(() => {
@@ -81,6 +132,15 @@ export default function ContactForm() {
       }, 5000)
     } catch (error) {
       console.error("Error submitting form:", error)
+
+      // Track failed submission
+      trackFormSubmission("contact_form", false, {
+        subject: formData.subject,
+        hasMessage: Boolean(formData.message.trim()),
+        errorType: "server_error",
+        submissionTime: timeSpent || undefined,
+      })
+
       setFormStatus("error")
 
       // Reset form status after 5 seconds
@@ -152,7 +212,18 @@ export default function ContactForm() {
         {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
       </div>
 
-      <div className="flex justify-end">
+      {/* reCAPTCHA component */}
+      <div className="flex flex-col items-center">
+        <ReCAPTCHA siteKey={RECAPTCHA_SITE_KEY} onChange={handleRecaptchaChange} />
+        {errors.recaptcha && <p className="text-xs text-red-500 mt-1">{errors.recaptcha}</p>}
+      </div>
+
+      <div className="flex justify-between items-center">
+        <div className="text-xs text-muted-foreground flex items-center">
+          <ShieldCheck className="h-3 w-3 mr-1" aria-hidden="true" tabIndex={-1} />
+          Dilindungi oleh reCAPTCHA
+        </div>
+
         <Button
           type="submit"
           disabled={formStatus === "submitting" || formStatus === "success"}

@@ -4,6 +4,8 @@ import Link from "next/link"
 import { Mail, MapPin, Phone, Globe, Clock } from "lucide-react"
 import Footer from "@/components/footer"
 import ContactForm from "@/components/contact-form"
+import ReCAPTCHAPrivacyNotice from "@/components/recaptcha-privacy-notice"
+import LocationCard from "@/components/location-card"
 
 export const metadata: Metadata = {
   title: "Kontak UnduhLagu - Informasi Geografis",
@@ -28,8 +30,8 @@ export default function KontakPage() {
               Indonesia.
             </p>
             <p>
-              Sebagai Platform Digital, Kami Menghormati Hak Cipta dan Sesuai Dengan Peraturan Yang Berlaku di
-              Indonesia Terkait dengan Distribusi Konten Digital.
+              Sebagai Platform Digital, Kami Menghormati Hak Cipta dan Sesuai Dengan Peraturan Yang Berlaku di Indonesia
+              Terkait dengan Distribusi Konten Digital.
             </p>
           </div>
 
@@ -85,6 +87,52 @@ export default function KontakPage() {
               akan merespons dalam waktu 1-2 hari kerja.
             </p>
             <ContactForm />
+            <ReCAPTCHAPrivacyNotice />
+          </div>
+
+          {/* Map Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm mb-8">
+            <h2 className="text-xl font-semibold mb-4 text-amber-700 dark:text-amber-400">Lokasi Kami</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <p className="text-sm">
+                  UnduhLagu beroperasi di Jakarta, Indonesia. Platform kami menyediakan layanan streaming dan download
+                  musik Indonesia secara online untuk pengguna di seluruh Indonesia.
+                </p>
+                <p className="text-sm">
+                  Meskipun kami beroperasi secara digital, kami memiliki kantor pusat di Jakarta untuk keperluan
+                  korespondensi resmi dan urusan bisnis.
+                </p>
+                <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-lg">
+                  <h3 className="font-medium text-amber-700 dark:text-amber-400 mb-2">Informasi Wilayah</h3>
+                  <ul className="text-sm space-y-2">
+                    <li>
+                      <strong>Negara:</strong> Indonesia
+                    </li>
+                    <li>
+                      <strong>Provinsi:</strong> DKI Jakarta
+                    </li>
+                    <li>
+                      <strong>Kode Pos:</strong> 10110
+                    </li>
+                    <li>
+                      <strong>Zona Waktu:</strong> WIB (GMT+7)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <LocationCard
+                address="Jl. Sudirman No. 123, Jakarta Pusat, DKI Jakarta, Indonesia 10110"
+                mapLocation="Jakarta, Indonesia"
+                operatingHours="Senin - Jumat: 09.00 - 18.00 WIB"
+                phone="+6282227920263"
+                email="unduhlagu123@gmail.com"
+              />
+            </div>
+            <p className="mt-6 text-xs text-muted-foreground">
+              Catatan: UnduhLagu adalah platform digital yang terutama beroperasi secara online. Lokasi fisik hanya
+              untuk keperluan korespondensi resmi dan tidak melayani kunjungan tanpa janji temu.
+            </p>
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm mb-8">
