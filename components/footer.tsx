@@ -72,7 +72,8 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-4 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Unduh Lagu. Hak Cipta Dilindungi.</p>
+          <p>&copy; {new Date().getFullYear()} UnduhLagu.</p>
+          <p>Hak Cipta Dilindungi.</p>
           <p className="mt-1">
             <Link href="/kontak" className="text-amber-500 hover:text-red-600 transition-colors">
               Informasi Geografis
